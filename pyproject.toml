@@ -1,13 +1,30 @@
+[project]
+name = "mtime"
+version = "0.0.1"
+authors = [
+  { name="Ian Alevy", email="ian.alevy.math@gmail.com" },
+]
+description = "A library for dealing with time."
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  "numpy",
+]
+
+[project.urls]
+Repository = "https://github.com/ianalevy/mtime"
+
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 
-[project]
-requires-python = ">= 3.12"
-dependencies = [
-  "numpy",
-]
+
 
 [tool.pytest.ini_options]
 pythonpath = [
