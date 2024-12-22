@@ -1,3 +1,5 @@
+# pyproject.toml
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -28,14 +30,13 @@ Repository = "https://github.com/ianalevy/mtime"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q -s"
+addopts = "-ra -q"
 testpaths = [
-    "tests",
+    "test",
 ]
 pythonpath = [
   "."
 ]
-
 
 [tool.ruff]
 # Assume Python 3.12
@@ -45,7 +46,7 @@ target-version = "py39"
 select = ["ALL"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/*" = ["ANN201","D101", "D102", "S101"]
+"test/*" = ["ANN201","D101", "D102", "S101"]
 
 [tool.ruff.lint.flake8-annotations]
 mypy-init-return = true
