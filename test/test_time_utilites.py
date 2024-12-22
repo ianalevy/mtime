@@ -23,6 +23,10 @@ class TestPtime(unittest.TestCase):
         assert ptime.w_sec == 172800
         assert np.isclose(ptime.f_sec, 0.123)
 
+    def test_to_dict(self):
+        ptime = PTime(345600, 0.123, epoch="19910204")
+        assert ptime.gtk_format == {"w_sec": 345600, "f_sec": 0.123}
+
 
 class Test1(unittest.TestCase):
     def test_1(self):

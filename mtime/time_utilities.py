@@ -51,6 +51,17 @@ class PTime:
         self.w_sec = self.w_sec + num_secs
         self.epoch = new_epoch
 
+    @property
+    def gtk_format(self) -> dict:
+        """Format for GTK input.
+
+        Returns
+        -------
+        dict
+
+        """
+        return {"w_sec": self.w_sec, "f_sec": self.f_sec}
+
 
 def datetime_to_ptime(np_time: np.datetime64, epoch: str = DEFAULT_EPOCH) -> PTime:
     time_str = epoch_for_np(epoch)
