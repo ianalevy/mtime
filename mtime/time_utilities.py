@@ -44,5 +44,11 @@ def datetime_to_ptime(np_time: np.datetime64, epoch: str = DEFAULT_EPOCH) -> PTi
     return PTime(w_secs, f_secs, epoch)
 
 
-def add_one(number):
-    return number + 1
+def ptime_to_datetime(ptime: PTime, epoch: str = DEFAULT_EPOCH) -> np.datetime64:
+    f_sec = int(ptime.f_sec * (1e9))
+
+    return (
+        np.datetime64(epoch_for_np(epoch))
+        + np.timedelta64(ptime.w_sec, "s")
+        + np.timedelta64(f_sec, "ns")
+    )
