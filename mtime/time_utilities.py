@@ -51,6 +51,12 @@ class PTime:
         self.w_sec = self.w_sec + num_secs
         self.epoch = new_epoch
 
+    def __sub__(self, other: PTime):
+        self.w_sec = self.w_sec - other.w_sec
+        self.f_sec = self.f_sec - other.f_sec
+
+        return self
+
     @property
     def gtk_format(self) -> dict:
         """Format for GTK input.

@@ -1,3 +1,4 @@
+import math
 import unittest
 
 import numpy as np
@@ -26,6 +27,16 @@ class TestPtime(unittest.TestCase):
     def test_to_dict(self):
         ptime = PTime(345600, 0.123, epoch="19910204")
         assert ptime.gtk_format == {"w_sec": 345600, "f_sec": 0.123}
+
+    def test_diff(self):
+        ptime1 = PTime(345602, 0.123456789, epoch="19910204")
+        ptime2 = PTime(245600, 0.100000001, epoch="19910204")
+
+        diff = ptime1 - ptime2
+        # check for accuracy to nearest nanosecond
+        assert not math.isclose(diff.f_sec, 0.023456789, abs_tol=1e-10)
+        assert math.isclose(diff.f_sec, 0.023456788, abs_tol=1e-10)
+        assert diff.w_sec == 100002
 
 
 class Test1(unittest.TestCase):
