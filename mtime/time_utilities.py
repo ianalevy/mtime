@@ -69,6 +69,27 @@ class PTime:
         return {"w_sec": self.w_sec, "f_sec": self.f_sec}
 
 
+def ptime_to_ticks(ptime: PTime) -> int:
+    """Convert ptime to time ticks.
+
+    Time ticks are number of nanoseconds.
+
+    Parameters
+    ----------
+    ptime : PTime
+
+    Returns
+    -------
+    int
+        number of nanoseconds
+
+    """
+    w_ns = int(ptime.w_sec * 1e9)
+    f_ns = int(ptime.f_sec * 1e9)
+
+    return w_ns + f_ns
+
+
 def datetime_to_ptime(np_time: np.datetime64, epoch: str = DEFAULT_EPOCH) -> PTime:
     time_str = epoch_for_np(epoch)
 

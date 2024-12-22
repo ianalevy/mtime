@@ -8,6 +8,7 @@ from mtime.time_utilities import (
     datetime_to_ptime,
     epoch_for_np,
     ptime_to_datetime,
+    ptime_to_ticks,
 )
 
 
@@ -37,6 +38,12 @@ class TestPtime(unittest.TestCase):
         assert not math.isclose(diff.f_sec, 0.023456789, abs_tol=1e-10)
         assert math.isclose(diff.f_sec, 0.023456788, abs_tol=1e-10)
         assert diff.w_sec == 100002
+
+    def test_to_ticks(self):
+        time1 = PTime(345602, 0.123456789, epoch="19910204")
+
+        res = ptime_to_ticks(time1)
+        assert res == 345602123456789
 
 
 class Test1(unittest.TestCase):
