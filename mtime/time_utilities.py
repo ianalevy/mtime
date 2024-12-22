@@ -5,6 +5,24 @@ import numpy as np
 DEFAULT_EPOCH = "19500101"
 
 
+def epoch_for_np(epoch: str) -> str:
+    """Format epoch string for numpy.
+
+    Parameters
+    ----------
+    epoch : str
+
+    Returns
+    -------
+    str
+
+    """
+    year = epoch[:4]
+    month = epoch[4:6]
+    day = epoch[6:8]
+    return f"{year}-{month}-{day}"
+
+
 class PTime:
     def __init__(
         self,
@@ -16,26 +34,9 @@ class PTime:
         self.f_sec = f_sec
         self.epoch = epoch
 
-    @property
-    def epoch_for_np(self) -> str:
-        """Format epoch for numpy.
-
-        Returns
-        -------
-        str
-
-        """
-        year = self.epoch[:4]
-        month = self.epoch[4:6]
-        day = self.epoch[6:8]
-        return f"{year}-{month}-{day}"
-
 
 def datetime_to_ptime(np_time: np.datetime64, epoch: str = DEFAULT_EPOCH) -> PTime:
-    year = epoch[:4]
-    month = epoch[4:6]
-    day = epoch[6:8]
-    time_str = f"{year}-{month}-{day}"
+    time_str = epoch_for_np(epoch)
 
     epoch_delta = (np_time - np.datetime64(time_str)) / np.timedelta64(1, "s")
     f_secs, w_secs = np.modf(epoch_delta)
