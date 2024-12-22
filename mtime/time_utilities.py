@@ -26,13 +26,30 @@ def epoch_for_np(epoch: str) -> str:
 class PTime:
     def __init__(
         self,
-        w_sec: str | float | int,
+        w_sec: float | int,
         f_sec: float,
         epoch: str = DEFAULT_EPOCH,
     ):
-        self.w_sec = str(int(w_sec))
+        self.w_sec = int(w_sec)
         self.f_sec = f_sec
         self.epoch = epoch
+
+    def change_epoch(self, new_epoch: str):
+        """Update times for new epoch.
+
+        Parameters
+        ----------
+        new_epoch : str
+
+        """
+        num_secs = (
+            np.datetime64(epoch_for_np(self.epoch))
+            - np.datetime64(
+                epoch_for_np(new_epoch),
+            )
+        ) / np.timedelta64(1, "s")
+        self.w_sec = self.w_sec + num_secs
+        self.epoch = new_epoch
 
 
 def datetime_to_ptime(np_time: np.datetime64, epoch: str = DEFAULT_EPOCH) -> PTime:
