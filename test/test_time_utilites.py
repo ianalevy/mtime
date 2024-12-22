@@ -2,7 +2,13 @@ import unittest
 
 import numpy as np
 
-from mtime.time_utilities import datetime_to_ptime
+from mtime.time_utilities import PTime, datetime_to_ptime
+
+
+class TestPtime(unittest.TestCase):
+    def test_epoch(self):
+        ptime = PTime(123, 0.123, "19910521")
+        assert ptime.epoch_for_np == "1991-05-21"
 
 
 class Test1(unittest.TestCase):
