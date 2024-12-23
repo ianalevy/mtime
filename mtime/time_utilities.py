@@ -1,6 +1,22 @@
 from __future__ import annotations
 
+from enum import Enum
+
 import numpy as np
+
+
+class Units(Enum):
+    """Metric unit prefixes."""
+
+    tera = 1e12
+    giga = 1e9
+    mega = 1e6
+    kilo = 1e3
+    milli = 1e-3
+    micro = 1e-6
+    nano = 1e-9
+    pico = 1e-12
+
 
 DEFAULT_EPOCH = "19500101"
 
