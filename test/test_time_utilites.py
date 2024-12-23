@@ -5,11 +5,18 @@ import numpy as np
 
 from mtime.time_utilities import (
     PTime,
+    Units,
     datetime_to_ptime,
     epoch_for_np,
     ptime_to_datetime,
     ptime_to_ticks,
 )
+
+
+class TestUnits(unittest.TestCase):
+    def test_conversion(self):
+        foo = Units.nano
+        assert math.isclose(foo.value * 5, 5e-9)
 
 
 class TestPtime(unittest.TestCase):
@@ -23,7 +30,7 @@ class TestPtime(unittest.TestCase):
 
         assert ptime.epoch == "19910206"
         assert ptime.w_sec == 172800
-        assert np.isclose(ptime.f_sec, 0.123)
+        assert math.isclose(ptime.f_sec, 0.123)
 
     def test_to_dict(self):
         ptime = PTime(345600, 0.123, epoch="19910204")
